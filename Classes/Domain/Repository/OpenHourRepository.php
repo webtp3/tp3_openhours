@@ -56,6 +56,6 @@ class OpenHourRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $query->equals('deleted', 0)
             )
         );
-        return $query->execute(true);
+        return $query->execute();
     }
 }
