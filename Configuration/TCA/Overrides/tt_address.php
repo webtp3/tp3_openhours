@@ -1,6 +1,5 @@
- <?php
+<?php
 defined('TYPO3_MODE') || die();
-
 
 $tmp_tp3_openhours_columns = [
 
