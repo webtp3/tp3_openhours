@@ -1,9 +1,7 @@
- <?php
+<?php
 defined('TYPO3_MODE') || die();
 
-
 $tmp_tp3_openhours_columns = [
-
     'open_hours' => [
         'exclude' => true,
         'label' => 'LLL:EXT:tp3_openhours/Resources/Private/Language/locallang_db.xlf:tx_tp3openhours_domain_model_ttaddress.open_hours',
