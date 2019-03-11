@@ -1,8 +1,7 @@
 {
     "name": "web-tp3/tp3_openhours",
     "type": "typo3-cms-extension",
-    "title" : "tp3 OpenHopurs",
-    "description" : "OpenHours for tt_address and Businessview",
+    "description" : "tp3 OpenHours for tt_address and Businessview",
     "license": "GPL-2.0+",
     "require": {
         "php": ">=7.0 <7.3",
