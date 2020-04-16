@@ -4,8 +4,8 @@
     "description" : "tp3 OpenHours for tt_address and Businessview",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": ">=7.0 <7.4",
-        "typo3/cms-core": "^7.6 || ^8.2 || ^9"
+        "php": ">=7.0 <7.5",
+        "typo3/cms-core": "^7.6 || ^8.2 || ^9 || ^10"
     },
     "autoload": {
         "psr-4": {
