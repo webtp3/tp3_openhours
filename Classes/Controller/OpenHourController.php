@@ -28,7 +28,7 @@ class OpenHourController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * openHourRepository
      *
      * @var \Tp3\Tp3Openhours\Domain\Repository\OpenHourRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $openHourRepository = null;
 

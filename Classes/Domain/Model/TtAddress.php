@@ -28,7 +28,7 @@ class TtAddress extends \TYPO3\TtAddress\Domain\Model\Address
      * openHours
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Tp3\Tp3Openhours\Domain\Model\OpenHour>
-     * @cascade remove
+     *
      */
     protected $openHours = null;
 

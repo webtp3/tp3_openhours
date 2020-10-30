@@ -46,7 +46,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      * Day of OpenHours
      *
      * @var int
-     * @validate NotEmpty
+     *
      */
     protected $day = 0;
 
@@ -54,7 +54,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      * openTime
      *
      * @var int
-     * @validate NotEmpty
+     *
      */
     protected $openTime = 0;
 
