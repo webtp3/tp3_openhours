@@ -22,7 +22,7 @@ namespace Tp3\Tp3Openhours\Domain\Model;
 /**
  * TtAddress
  */
-class TtAddress extends \TYPO3\TtAddress\Domain\Model\Address
+class TtAddress extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address
 {
     /**
      * openHours
@@ -38,6 +38,7 @@ class TtAddress extends \TYPO3\TtAddress\Domain\Model\Address
     public function __construct()
     {
         //Do not remove the next line: It would break the functionality
+        parent::__construct();
         $this->initStorageObjects();
     }
 

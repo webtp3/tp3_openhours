@@ -22,9 +22,13 @@ The recommended way to install the extension is by using (Composer)
 
 | tp3_openhours | TYPO3      | PHP       | Support/Development                          |
 | ------------- | ---------- | ----------|----------------------------------------------|
-| 1.x           | 8.7 - 9.5  | 7.0 - 7.2 | Plugin for FE Output                         |
+| 1.x           | 9.5 - 10.4 | 7.2 - 7.4 | ViewHelper returns OpenHours                         |
 | 0.x           | 8.7 - 9.5  | 7.0 - 7.2 | Tp3BusinessView Integration, Tp3mods Json-LD |
 
+###viewhelper usage
+	<f:for each="{oh:OpenHours(parameters:settings.list.openHours.parameters,addresses:addresses)}" as="address" iteration="iterator">
+		<f:debug>{address}</f:debug>
+</f:for>
 
 ##Copyleft
 This file is part of the "tp3_openhours" Extension for TYPO3 CMS.

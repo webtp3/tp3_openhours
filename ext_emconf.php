@@ -12,11 +12,11 @@ $EM_CONF[$_EXTKEY] = [
   'category' => 'misc',
   'author' => 'Thomas Ruta',
   'author_email' => 'email@thomasruta.de',
-  'state' => 'alpha',
+  'state' => 'beta',
   'uploadfolder' => false,
   'createDirs' => '',
   'clearCacheOnLoad' => 0,
-  'version' => '0.1.3',
+  'version' => '1.0.0',
   'constraints' =>
   [
 'depends' =>
