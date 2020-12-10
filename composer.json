@@ -1,12 +1,11 @@
 {
     "name": "web-tp3/tp3_openhours",
     "type": "typo3-cms-extension",
-	"version": "1.0.0",
     "description" : "tp3 OpenHours for tt_address and Businessview",
     "license": "GPL-2.0-or-later",
     "require": {
         "php": ">=7.0 <7.5",
-        "typo3/cms-core": "^7.6 || ^8.2 || ^9 || ^10"
+        "typo3/cms-core": " ^9.5 || ^10.4.9"
     },
     "autoload": {
         "psr-4": {
