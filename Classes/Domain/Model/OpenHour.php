@@ -8,6 +8,8 @@
 
 namespace Tp3\Tp3Openhours\Domain\Model;
 
+use phpDocumentor\Reflection\Types\Integer;
+
 /***
  *
  * This file is part of the "tt_address OpenHours" Extension for TYPO3 CMS.
@@ -18,12 +20,26 @@ namespace Tp3\Tp3Openhours\Domain\Model;
  *  (c) 2018 Thomas Ruta &lt;email@thomasruta.de>, tp3
  *
  ***/
-
+use DateTime;
+use DateTimeZone;
 /**
  * OpenHour
  */
 class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
 {
+    /**
+     * UTC Offset
+     *
+     * @var Integer
+     */
+    public $offset = 0;
+
+    /**
+     * DateTime Object
+     *
+     * @var DateTime
+     */
+    public $dateTime = null;
 
     /**
      * DayArray
@@ -64,6 +80,19 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      * @var int
      */
     protected $closeTime = 0;
+
+
+
+    public function getOffset(){
+        $this_tz_str = date_default_timezone_get();
+        $this_tz = new DateTimeZone($this_tz_str);
+        $now = new DateTime("now", $this_tz);
+        $this->offset = $this_tz->getOffset($now);
+
+    }
+
+
+
     /**
      * Returns the day
      *
@@ -79,6 +108,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
         }
         $this->DayArray = array_merge($this->DayArray, $days);
     }
+
     /**
      * Returns the day
      *
@@ -116,7 +146,8 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      */
     public function getOpenTime()
     {
-        return $this->openTime;
+        $this->getOffset();
+        return ($this->openTime - $this->offset);
     }
 
     /**
@@ -137,7 +168,8 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      */
     public function getCloseTime()
     {
-        return $this->closeTime;
+        $this->getOffset();
+        return ($this->closeTime - $this->offset);
     }
 
     /**
