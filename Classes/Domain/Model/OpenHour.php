@@ -30,7 +30,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      *
      * @var array
      */
-    protected $DayArray =  ['', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So', 'Mo-Fr', 'Sa-So', '24x7'];
+    public $DayArray =  ['', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So', 'Mo-Fr', 'Sa-So', '24x7'];
     /*
         ['Mo'=> 1],
         ['Di'=> 2],

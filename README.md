@@ -26,7 +26,7 @@ The recommended way to install the extension is by using (Composer)
 | 0.x           | 8.7 - 9.5  | 7.0 - 7.2 | Tp3BusinessView Integration, Tp3mods Json-LD |
 
 ###viewhelper usage
-	<f:for each="{oh:OpenHours(parameters:settings.list.openHours.parameters,addresses:addresses)}" as="address" iteration="iterator">
+	<f:for each="{oh:OpenHours(parameters:settings.list.openHours.parameters,addresses:address)}" as="address" iteration="iterator">
 		<f:debug>{address}</f:debug>
 </f:for>
 

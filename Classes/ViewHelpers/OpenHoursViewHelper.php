@@ -70,12 +70,19 @@ class OpenHoursViewHelper extends AbstractViewHelper
      * @param array $result
      * @return array
      */
-    protected function mapResultToObjects(array $result): array
+    protected function mapResultToObjects( $result): array
     {
         $out = [];
-        foreach ($result as $_id => $single) {
-            $out[$_id] = $this->getObject($single->getUid());
-        }
+       if(is_array($result)){
+           foreach ($result as $_id => $single) {
+               if($single->getUid() > 0 && !in_array($single->getUid(),$out)){
+                   $out[$_id] = $this->getObject($single->getUid());
+               }
+           }
+       }else{
+           $out = $this->getObject($result->getUid());
+
+       }
 
         return $out;
     }
@@ -90,28 +97,29 @@ class OpenHoursViewHelper extends AbstractViewHelper
     protected function getObject($id)
     {
         $record = [];
+        unset($rawRecords);
+        $rawRecords = $this->getRawRecord($id);
+        while($rawRecord = $rawRecords->fetch()){
 
-        $rawRecord = $this->getRawRecord($id);
+                /** @var LanguageAspect $languageAspect */
+                $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
 
-        /** @var LanguageAspect $languageAspect */
-        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
-
-        if (isset($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE']) && $languageAspect->getContentId() > 0) {
-            $overlay = $GLOBALS['TSFE']->sys_page->getRecordOverlay(
-                'tx_tp3openhours_domain_model_openhour',
-                $rawRecord,
-                $languageAspect->getContentId(),
-                $languageAspect->getLegacyOverlayType()
-            );
-            if (!is_null($overlay)) {
-                $rawRecord = $overlay;
-            }
+                if (isset($GLOBALS['TSFE']) && is_object($GLOBALS['TSFE']) && $languageAspect->getContentId() > 0) {
+                    $overlay = $GLOBALS['TSFE']->sys_page->getRecordOverlay(
+                        'tx_tp3openhours_domain_model_openhour',
+                        $rawRecord,
+                        $languageAspect->getContentId(),
+                        $languageAspect->getLegacyOverlayType()
+                    );
+                    if (!is_null($overlay)) {
+                        $rawRecord = $overlay;
+                    }
+                }
+                if (is_array($rawRecord)) {
+                    $records = $this->dataMapper->map(OpenHour::class, [$rawRecord]);
+                 $record[] = array_shift($records);
+                }
         }
-        if (is_array($rawRecord)) {
-            $records = $this->dataMapper->map(OpenHour::class, [$rawRecord]);
-            $record = array_shift($records);
-        }
-
         return $record;
     }
 
@@ -122,7 +130,7 @@ class OpenHoursViewHelper extends AbstractViewHelper
     protected function getQueryBuilder()
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('tt_address');
+            ->getQueryBuilderForTable('tx_tp3openhours_domain_model_openhour');
     }
 
     /**
@@ -138,8 +146,7 @@ class OpenHoursViewHelper extends AbstractViewHelper
             ->where(
                 $queryBuilder->expr()->eq('ttaddress', $queryBuilder->createNamedParameter($id, \PDO::PARAM_INT))
             )
-            ->setMaxResults(1)
-            ->execute()->fetch();
+            ->execute();
         return $rawRecord;
     }
 }
