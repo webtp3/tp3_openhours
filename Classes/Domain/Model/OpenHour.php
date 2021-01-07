@@ -8,8 +8,6 @@
 
 namespace Tp3\Tp3Openhours\Domain\Model;
 
-use phpDocumentor\Reflection\Types\Integer;
-
 /***
  *
  * This file is part of the "tt_address OpenHours" Extension for TYPO3 CMS.
