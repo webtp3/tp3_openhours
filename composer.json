@@ -5,15 +5,18 @@
     "license": "GPL-2.0-or-later",
     "require": {
         "php": ">=7.0 <7.5",
-        "typo3/cms-core": " ^9.5 || ^10.4.9"
+        "typo3/cms-core": "^9.5 || ^10.4"
     },
     "autoload": {
         "psr-4": {
             "Tp3\\Tp3Openhours\\": "Classes"
         }
     },
-    "replace": {
-        "web-tp3/tp3_openhours": "self.version"
+
+	"typo3/cms": {
+		"extension-key": "tp3_openhours",
+		"cms-package-dir": "{$vendor-dir}/typo3/cms",
+		"web-dir": ".Build/Web"
     }
     
 }
