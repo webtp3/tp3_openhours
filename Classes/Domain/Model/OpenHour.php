@@ -1,4 +1,11 @@
 <?php
+
+/*
+ * This file is part of the web-tp3/tp3openhours.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Tp3\Tp3Openhours\Domain\Model;
 
 /***
@@ -11,19 +18,33 @@ namespace Tp3\Tp3Openhours\Domain\Model;
  *  (c) 2018 Thomas Ruta &lt;email@thomasruta.de>, tp3
  *
  ***/
-
+use DateTime;
+use DateTimeZone;
 /**
  * OpenHour
  */
 class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
 {
+    /**
+     * UTC Offset
+     *
+     * @var Integer
+     */
+    public $offset = 0;
+
+    /**
+     * DateTime Object
+     *
+     * @var DateTime
+     */
+    public $dateTime = null;
 
     /**
      * DayArray
      *
      * @var array
      */
-    protected $DayArray =  ['','Mo','Di','Mi','Do','Fr','Sa','So','Mo-Fr','Sa-So','24x7'];
+    public $DayArray =  ['', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So', 'Mo-Fr', 'Sa-So', '24x7'];
     /*
         ['Mo'=> 1],
         ['Di'=> 2],
@@ -37,30 +58,63 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
 
     /**
      * Day of OpenHours
-     * 
+     *
      * @var int
-     * @validate NotEmpty
+     *
      */
     protected $day = 0;
 
     /**
      * openTime
-     * 
+     *
      * @var int
-     * @validate NotEmpty
+     *
      */
     protected $openTime = 0;
 
     /**
      * closeTime
-     * 
+     *
      * @var int
      */
     protected $closeTime = 0;
 
+
+
+    public function getOffset(){
+        $this_tz_str = date_default_timezone_get();
+        $this_tz = new DateTimeZone($this_tz_str);
+        $inttime = time();
+        $abbriviation = $this_tz->getTransitions($inttime,$inttime);
+        if($abbriviation[0]["isdst"]){
+            $inttime = $inttime - 3600;
+        }
+        $now = new DateTime('now' , $this_tz);
+        $this->offset = $abbriviation[0]["isdst"] ? $this_tz->getOffset($now) - 3600 : $this_tz->getOffset($now);
+
+    }
+
+
+
     /**
      * Returns the day
-     * 
+     *
+     * @return int $day
+     */
+    public function getDayNames()
+    {
+        $timestamp = strtotime('next Sunday');
+        $days = [];
+        for ($i = 0; $i < 7; $i++) {
+            $days[] = strftime('%A', $timestamp);
+            $timestamp = strtotime('+1 day', $timestamp);
+        }
+        $this->DayArray = array_merge($this->DayArray, $days);
+    }
+
+    /**
+     * Returns the day
+     *
      * @return int $day
      */
     public function getDay()
@@ -79,7 +133,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
 
     /**
      * Sets the day
-     * 
+     *
      * @param int $day
      * @return void
      */
@@ -90,17 +144,18 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
 
     /**
      * Returns the openTime
-     * 
+     *
      * @return int $openTime
      */
     public function getOpenTime()
     {
-        return $this->openTime;
+        $this->getOffset();
+        return ($this->openTime - $this->offset);
     }
 
     /**
      * Sets the openTime
-     * 
+     *
      * @param int $openTime
      * @return void
      */
@@ -111,17 +166,18 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
 
     /**
      * Returns the closeTime
-     * 
+     *
      * @return int $closeTime
      */
     public function getCloseTime()
     {
-        return $this->closeTime;
+        $this->getOffset();
+        return ($this->closeTime - $this->offset);
     }
 
     /**
      * Sets the closeTime
-     * 
+     *
      * @param int $closeTime
      * @return void
      */

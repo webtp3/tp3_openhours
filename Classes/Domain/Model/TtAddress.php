@@ -1,4 +1,11 @@
 <?php
+
+/*
+ * This file is part of the web-tp3/tp3openhours.
+ * For the full copyright and license information, please read the
+ * LICENSE file that was distributed with this source code.
+ */
+
 namespace Tp3\Tp3Openhours\Domain\Model;
 
 /***
@@ -15,13 +22,13 @@ namespace Tp3\Tp3Openhours\Domain\Model;
 /**
  * TtAddress
  */
-class TtAddress extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class TtAddress extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address
 {
     /**
      * openHours
-     * 
+     *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Tp3\Tp3Openhours\Domain\Model\OpenHour>
-     * @cascade remove
+     *
      */
     protected $openHours = null;
 
@@ -31,6 +38,7 @@ class TtAddress extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function __construct()
     {
         //Do not remove the next line: It would break the functionality
+        parent::__construct();
         $this->initStorageObjects();
     }
 
@@ -39,7 +47,7 @@ class TtAddress extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
-     * 
+     *
      * @return void
      */
     protected function initStorageObjects()
@@ -49,7 +57,7 @@ class TtAddress extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Adds a OpenHour
-     * 
+     *
      * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour
      * @return void
      */
@@ -60,7 +68,7 @@ class TtAddress extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Removes a OpenHour
-     * 
+     *
      * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $openHourToRemove The OpenHour to be removed
      * @return void
      */
@@ -71,7 +79,7 @@ class TtAddress extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Returns the openHours
-     * 
+     *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Tp3\Tp3Openhours\Domain\Model\OpenHour> $openHours
      */
     public function getOpenHours()
@@ -81,7 +89,7 @@ class TtAddress extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
     /**
      * Sets the openHours
-     * 
+     *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Tp3\Tp3Openhours\Domain\Model\OpenHour> $openHours
      * @return void
      */
