@@ -9,7 +9,7 @@
 defined('TYPO3') || die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'Tp3.Tp3Openhours',
+    'tp3_openhours',
     'ListView',
     'tt_address OpenHours'
 );

@@ -21,9 +21,8 @@ The recommended way to install the extension is by using (Composer)
 ### Versions and support
 
 | tp3_openhours | TYPO3      | PHP       | Support/Development                          |
-|---------------|------------|-----------|----------------------------------------------|
-| 2.x           | 11 - 12    | 8 - 8.4   | translations & viewhelper                    |
-| 1.x           | 8.7 - 10.4 | 7.0 - 8   | Plugin for FE Output                         |
+| ------------- | ---------- | ----------|----------------------------------------------|
+| 1.x           | 8.7 - 9.5  | 7.0 - 7.2 | Plugin for FE Output                         |
 | 0.x           | 8.7 - 9.5  | 7.0 - 7.2 | Tp3BusinessView Integration, Tp3mods Json-LD |
 
 ###viewhelper usage

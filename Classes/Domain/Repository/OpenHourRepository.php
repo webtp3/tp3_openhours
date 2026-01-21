@@ -18,6 +18,7 @@ namespace Tp3\Tp3Openhours\Domain\Repository;
  *  (c) 2018 Thomas Ruta &lt;email@thomasruta.de>, tp3
  *
  ***/
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * The repository for OpenHours
@@ -34,7 +35,7 @@ class OpenHourRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function initializeObject()
     {
         /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
         // go for $defaultQuerySettings = $this->createQuery()->getQuerySettings(); if you want to make use of the TS persistence.storagePid with defaultQuerySettings(), see #51529 for details
         $querySettings->setRespectStoragePage(true);
 
@@ -51,7 +52,7 @@ class OpenHourRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findByAddress($uid)
     {
-        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
         $querySettings->setRespectStoragePage(false);
 
         $this->setDefaultQuerySettings($querySettings);
