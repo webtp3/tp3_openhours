@@ -22,7 +22,7 @@ The recommended way to install the extension is by using (Composer)
 
 | tp3_openhours | TYPO3      | PHP       | Support/Development                          |
 | ------------- | ---------- | ----------|----------------------------------------------|
-| 1.x           | 9.5 - 10.4 | 7.2 - 7.4 | ViewHelper returns OpenHours                         |
+| 1.x           | 8.7 - 9.5  | 7.0 - 7.2 | Plugin for FE Output                         |
 | 0.x           | 8.7 - 9.5  | 7.0 - 7.2 | Tp3BusinessView Integration, Tp3mods Json-LD |
 
 ###viewhelper usage

@@ -6,7 +6,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-defined('TYPO3_MODE') || die();
+defined('TYPO3') || die();
 
 $tmp_tp3_openhours_columns = [
     'open_hours' => [

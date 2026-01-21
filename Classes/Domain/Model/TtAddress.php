@@ -50,7 +50,7 @@ class TtAddress extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address
      *
      * @return void
      */
-    protected function initStorageObjects()
+    protected function initStorageObjects(): void
     {
         $this->openHours = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
@@ -61,7 +61,7 @@ class TtAddress extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address
      * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour
      * @return void
      */
-    public function addOpenHour(\Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour)
+    public function addOpenHour(\Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour): void
     {
         $this->openHours->attach($openHour);
     }
@@ -72,7 +72,7 @@ class TtAddress extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address
      * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $openHourToRemove The OpenHour to be removed
      * @return void
      */
-    public function removeOpenHour(\Tp3\Tp3Openhours\Domain\Model\OpenHour $openHourToRemove)
+    public function removeOpenHour(\Tp3\Tp3Openhours\Domain\Model\OpenHour $openHourToRemove): void
     {
         $this->openHours->detach($openHourToRemove);
     }
@@ -82,7 +82,7 @@ class TtAddress extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Tp3\Tp3Openhours\Domain\Model\OpenHour> $openHours
      */
-    public function getOpenHours()
+    public function getOpenHours(): ?\TYPO3\CMS\Extbase\Persistence\ObjectStorage
     {
         return $this->openHours;
     }
@@ -93,7 +93,7 @@ class TtAddress extends \FriendsOfTYPO3\TtAddress\Domain\Model\Address
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Tp3\Tp3Openhours\Domain\Model\OpenHour> $openHours
      * @return void
      */
-    public function setOpenHours(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $openHours)
+    public function setOpenHours(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $openHours): void
     {
         $this->openHours = $openHours;
     }

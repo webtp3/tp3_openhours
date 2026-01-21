@@ -1,116 +1,78 @@
 <?php
 
-/*
- * This file is part of the web-tp3/tp3openhours.
- * For the full copyright and license information, please read the
- * LICENSE file that was distributed with this source code.
- */
+declare(strict_types=1);
 
 namespace Tp3\Tp3Openhours\Controller;
 
-/***
- *
- * This file is part of the "tt_address OpenHours" Extension for TYPO3 CMS.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with this source code.
- *
- *  (c) 2018 Thomas Ruta &lt;email@thomasruta.de>, tp3
- *
- ***/
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
+use Tp3\Tp3Openhours\Domain\Model\OpenHour;
+use Tp3\Tp3Openhours\Domain\Repository\OpenHourRepository;
 
-/**
- * OpenHourController
- */
-class OpenHourController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class OpenHourController extends ActionController
 {
-    /**
-     * openHourRepository
-     *
-     * @var \Tp3\Tp3Openhours\Domain\Repository\OpenHourRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected $openHourRepository = null;
+    private OpenHourRepository $openHourRepository;
 
-    /**
-     * action list
-     *
-     * @return void
-     */
-    public function listAction()
+    public function __construct(OpenHourRepository $openHourRepository)
+    {
+        $this->openHourRepository = $openHourRepository;
+    }
+
+    public function listAction(): ResponseInterface
     {
         $openHours = $this->openHourRepository->findAll();
         $this->view->assign('openHours', $openHours);
+        return $this->htmlResponse();
     }
 
-    /**
-     * action show
-     *
-     * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour
-     * @return void
-     */
-    public function showAction(\Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour)
+    public function showAction(OpenHour $openHour): ResponseInterface
     {
         $this->view->assign('openHour', $openHour);
+        return $this->htmlResponse();
     }
 
-    /**
-     * action new
-     *
-     * @return void
-     */
-    public function newAction()
+    public function newAction(): ResponseInterface
     {
+        return $this->htmlResponse();
     }
 
-    /**
-     * action create
-     *
-     * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $newOpenHour
-     * @return void
-     */
-    public function createAction(\Tp3\Tp3Openhours\Domain\Model\OpenHour $newOpenHour)
+    public function createAction(OpenHour $newOpenHour): ResponseInterface
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        $this->addFlashMessage(
+            'The object was created.',
+            '',
+            ContextualFeedbackSeverity::WARNING
+        );
         $this->openHourRepository->add($newOpenHour);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
-    /**
-     * action edit
-     *
-     * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour
-     * @ignorevalidation $openHour
-     * @return void
-     */
-    public function editAction(\Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour)
+    public function editAction(OpenHour $openHour): ResponseInterface
     {
         $this->view->assign('openHour', $openHour);
+        return $this->htmlResponse();
     }
 
-    /**
-     * action update
-     *
-     * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour
-     * @return void
-     */
-    public function updateAction(\Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour)
+    public function updateAction(OpenHour $openHour): ResponseInterface
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        $this->addFlashMessage(
+            'The object was updated.',
+            '',
+            ContextualFeedbackSeverity::WARNING
+        );
         $this->openHourRepository->update($openHour);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
-    /**
-     * action delete
-     *
-     * @param \Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour
-     * @return void
-     */
-    public function deleteAction(\Tp3\Tp3Openhours\Domain\Model\OpenHour $openHour)
+    public function deleteAction(OpenHour $openHour): ResponseInterface
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        $this->addFlashMessage(
+            'The object was deleted.',
+            '',
+            ContextualFeedbackSeverity::WARNING
+        );
         $this->openHourRepository->remove($openHour);
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 }

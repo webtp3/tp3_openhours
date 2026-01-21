@@ -6,7 +6,7 @@
  * LICENSE file that was distributed with this source code.
  */
 
-defined('TYPO3_MODE') || die();
+defined('TYPO3') || die();
 /*
  * // Add an entry in the static template list found in sys_templates for static TS
  *

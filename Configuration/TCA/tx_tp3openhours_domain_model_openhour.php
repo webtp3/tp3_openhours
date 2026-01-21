@@ -15,7 +15,14 @@ return [
         'cruser_id' => 'cruser_id',
         'sortby' => 'sorting',
         'languageField' => 'sys_language_uid',
-        'transOrigPointerField' => 'l10n_parent',
+        'hideTable' => true,
+        'security' => [
+            'ignoreWebMountRestriction' => true,
+            'ignoreRootLevelRestriction' => true,
+            'ignorePageTypeRestriction' => true,
+        ],
+        'rootLevel' => -1,
+
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
         'enablecolumns' => [
@@ -29,28 +36,16 @@ return [
             'default' => 'ext-tp3_businessview-wizard-icon'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, day, open_time, close_time',
-    ],
+
     'types' => [
         '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, day, open_time, close_time, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ]
-                ],
-                'default' => 0,
+                'type' => 'language',
             ],
         ],
         'l10n_parent' => [
