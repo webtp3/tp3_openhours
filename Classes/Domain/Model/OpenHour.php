@@ -81,7 +81,8 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
 
 
 
-    public function getOffset(){
+    public function getOffset(): void
+    {
         $this_tz_str = date_default_timezone_get();
         $this_tz = new DateTimeZone($this_tz_str);
         $inttime = time();
@@ -101,7 +102,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      *
      * @return int $day
      */
-    public function getDayNames()
+    public function getDayNames(): int
     {
         $timestamp = strtotime('next Sunday');
         $days = [];
@@ -117,7 +118,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      *
      * @return int $day
      */
-    public function getDay()
+    public function getDay(): int
     {
         return $this->day;
     }
@@ -126,7 +127,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      *
      * @return string
      */
-    public function getDayName()
+    public function getDayName(): string
     {
         return $this->DayArray[$this->day];
     }
@@ -137,7 +138,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      * @param int $day
      * @return void
      */
-    public function setDay($day)
+    public function setDay($day): void
     {
         $this->day = $day;
     }
@@ -147,7 +148,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      *
      * @return int $openTime
      */
-    public function getOpenTime()
+    public function getOpenTime(): int
     {
         $this->getOffset();
         return ($this->openTime - $this->offset);
@@ -159,7 +160,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      * @param int $openTime
      * @return void
      */
-    public function setOpenTime(int $openTime)
+    public function setOpenTime(int $openTime): void
     {
         $this->openTime = $openTime;
     }
@@ -169,7 +170,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      *
      * @return int $closeTime
      */
-    public function getCloseTime()
+    public function getCloseTime(): int
     {
         $this->getOffset();
         return ($this->closeTime - $this->offset);
@@ -181,7 +182,7 @@ class OpenHour extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
      * @param int $closeTime
      * @return void
      */
-    public function setCloseTime(int $closeTime)
+    public function setCloseTime(int $closeTime): void
     {
         $this->closeTime = $closeTime;
     }

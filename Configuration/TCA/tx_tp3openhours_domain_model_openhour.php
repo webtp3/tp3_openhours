@@ -15,7 +15,14 @@ return [
         'cruser_id' => 'cruser_id',
         'sortby' => 'sorting',
         'languageField' => 'sys_language_uid',
-        
+        'hideTable' => true,
+        'security' => [
+            'ignoreWebMountRestriction' => true,
+            'ignoreRootLevelRestriction' => true,
+            'ignorePageTypeRestriction' => true,
+        ],
+        'rootLevel' => -1,
+
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
         'enablecolumns' => [

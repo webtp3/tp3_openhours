@@ -18,7 +18,6 @@ namespace Tp3\Tp3Openhours\Domain\Repository;
  *  (c) 2018 Thomas Ruta &lt;email@thomasruta.de>, tp3
  *
  ***/
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * The repository for OpenHours
@@ -32,10 +31,10 @@ class OpenHourRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     ];
 
-    public function initializeObject()
+    public function initializeObject(): void
     {
         /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $querySettings = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
         // go for $defaultQuerySettings = $this->createQuery()->getQuerySettings(); if you want to make use of the TS persistence.storagePid with defaultQuerySettings(), see #51529 for details
         $querySettings->setRespectStoragePage(true);
 
@@ -45,14 +44,12 @@ class OpenHourRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
-     *
-     *
      * @param int $uid
-     * @return \Tp3\Tp3Openhours\Domain\Model\OpenHour
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface<\Tp3\Tp3Openhours\Domain\Model\OpenHour>
      */
-    public function findByAddress($uid)
+    public function findByAddress($uid): \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
     {
-        $querySettings = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings::class);
         $querySettings->setRespectStoragePage(false);
 
         $this->setDefaultQuerySettings($querySettings);
@@ -64,6 +61,8 @@ class OpenHourRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $query->equals('deleted', 0)
             )
         );
+
         return $query->execute();
     }
+
 }

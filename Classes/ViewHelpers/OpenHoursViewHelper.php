@@ -39,7 +39,7 @@ class OpenHoursViewHelper extends AbstractViewHelper
      *
      * @param \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper $dataMapper
      */
-    public function injectDataMapper(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper $dataMapper)
+    public function injectDataMapper(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper $dataMapper): void
     {
         $this->dataMapper = $dataMapper;
     }
@@ -47,7 +47,7 @@ class OpenHoursViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('addresses', 'mixed', 'Addresses', true);
@@ -60,7 +60,7 @@ class OpenHoursViewHelper extends AbstractViewHelper
      * @param RenderingContextInterface $renderingContext
      * @return string
      */
-    public function render()
+    public function render(): array|string
     {
         return  $this->mapResultToObjects( $this->arguments['addresses']);
     }
@@ -82,7 +82,7 @@ class OpenHoursViewHelper extends AbstractViewHelper
        }else if(is_int($result)){
            $out = $this->getObject($result);
 
-       } else {
+       } else  if(!empty($result)){
            $out = $this->getObject($result->getUid());
 
        }
@@ -97,12 +97,12 @@ class OpenHoursViewHelper extends AbstractViewHelper
      * @return mixed|null
      * @throws AspectNotFoundException
      */
-    protected function getObject($id)
+    protected function getObject($id): mixed
     {
         $record = [];
         unset($rawRecords);
         $rawRecords = $this->getRawRecord($id);
-        while($rawRecord = $rawRecords->fetch()){
+        while($rawRecord = $rawRecords->fetchAssociative()){
 
                 /** @var LanguageAspect $languageAspect */
                 $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
@@ -130,7 +130,7 @@ class OpenHoursViewHelper extends AbstractViewHelper
     /**
      * @return QueryBuilder
      */
-    protected function getQueryBuilder()
+    protected function getQueryBuilder(): QueryBuilder
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_tp3openhours_domain_model_openhour');
@@ -138,18 +138,21 @@ class OpenHoursViewHelper extends AbstractViewHelper
 
     /**
      * @param $id
-     * @return array
+     * @return \TYPO3\CMS\Core\Database\QueryResult
      */
     protected function getRawRecord($id)
     {
         $queryBuilder = $this->getQueryBuilder();
+        if(!is_int($id)){
+            return [];
+        }
         $rawRecord = $queryBuilder
             ->select('*')
             ->from('tx_tp3openhours_domain_model_openhour')
             ->where(
-                $queryBuilder->expr()->eq('ttaddress', $queryBuilder->createNamedParameter($id, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('ttaddress', $queryBuilder->createNamedParameter($id, \TYPO3\CMS\Core\Database\Connection::PARAM_INT))
             )
-            ->execute();
+            ->executeQuery();
         return $rawRecord;
     }
 }

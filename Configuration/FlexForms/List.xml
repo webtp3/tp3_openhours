@@ -117,8 +117,7 @@
                                         <numIndex index="1">sorting</numIndex>
                                     </numIndex>
                                 </items>
-                                <itemsProcFunc>FriendsOfTYPO3\TtAddress\Hooks\Tca\AddFieldsToSelector->main
-                                </itemsProcFunc>
+
                             </config>
                         </TCEforms>
                     </settings.sortBy>

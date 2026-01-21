@@ -98,9 +98,7 @@
                                         <numIndex index="1">default</numIndex>
                                     </numIndex>
                                 </items>
-                                <itemsProcFunc>
-                                    FriendsOfTYPO3\TtAddress\Hooks\FormEngine\LegacyPluginSelector->addFieldsToSelector
-                                </itemsProcFunc>
+
                             </config>
                         </TCEforms>
                     </sortBy>
