@@ -12,9 +12,7 @@
             "Tp3\\Tp3Openhours\\": "Classes"
         }
     },
-    "replace": {
-        "web-tp3/tp3_openhours": "self.version"
-    },
+
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "tp3_openhours",
